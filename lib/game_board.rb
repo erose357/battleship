@@ -38,9 +38,7 @@ class GameBoard
     "==========="
   end
 
-
-
-
-
-
 end
+
+board = GameBoard.new
+board.print_board

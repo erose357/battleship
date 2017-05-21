@@ -2,7 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/game_data'
-require 'pry'
+# require 'pry'
 class GameDataTest < Minitest::Test
 
   def test_print_border
