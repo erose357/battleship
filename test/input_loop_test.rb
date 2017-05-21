@@ -12,8 +12,17 @@ class InputLoopTest < Minitest::Test
     assert_equal expected, loop.prompt
   end
 
-  def test_loop_until_break
-  skip
+  def test_loop_creates_new_instance_of_welcome_screen
+    loop = InputLoop.new
+
+    assert_instance_of WelcomeScreen, loop.welcome
+  end
+
+  def test_welcome_message_at_game_start
+    loop = InputLoop.new
+    expected = "Welcome to BATTLESHIP"
+
+    assert_equal expected, loop.welcome.welcome_message
   end
 
 end
