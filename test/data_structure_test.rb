@@ -11,13 +11,13 @@ class DataStructureTest < Minitest::Test
                  "B4", "C1", "C2", "C3", "C4", "D1", "D2",
                  "D3", "D4" ]
 
-    assert_equal expected, data.coordinates.keys
+    assert_equal expected, data.grid_coordinates.keys
   end
 
   def test_one_change_one_key_value
     data = DataStructure.new
     expected = "M"
-    actual = data.coordinates["A1"] = "M"
+    actual = data.grid_coordinates["A1"] = "M"
 
     assert_equal expected, actual
   end
@@ -32,6 +32,12 @@ class DataStructureTest < Minitest::Test
     data = DataStructure.new
 
     assert_equal "M", data.miss("D4")
+  end
+
+  def test_random_ship_placement
+    data = DataStructure.new
+
+    assert_equal expected, actual
   end
 
 end
