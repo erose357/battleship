@@ -28,7 +28,7 @@ class WelcomeScreenTest < Minitest::Test
   def test_instruction_button
     screen = WelcomeScreen.new
     expected = "need to write instructions message"
-    #this message will print to the
+    #this message will print to the screen
     #and then will have a prompt below
     #repeat options on message screen?
     assert_equal expected, screen.instructions
