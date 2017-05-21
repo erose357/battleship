@@ -8,21 +8,39 @@ class GameData
       5 => { "D1" => ".", "D2" => ".", "D3" => ".", "D4" => "." } }
   end
 
-  def print_one_row
+  def border
+    "==========="
+  end
+
+  def row_labels
+    [ "A", "B", "C", "D" ]
+  end
+
+  def column_labels
+    [ "1", "2", "3", "4" ]
+  end
+
+
+  def print_data_area
     # string = []
     final = ""
     index = 2
-    until index == 3
+    until index == 6
       string = []
       board_data[index].each do |k, v|
         string << "#{v}\s"
       end
-       final += string.join+"\n\s"
+       final += string.join+"\n"
       index += 1
       # binding.pry
     end
     # binding.pry
-    return final
+    return print final
+  end
+
+  def print_board
+    print "#{border}\n"
+    print column_labels
   end
 
 end
