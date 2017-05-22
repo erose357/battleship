@@ -1,6 +1,14 @@
 
 class DataStructure
 
+  attr_reader :player_board,
+              :computer_board
+
+  def initialize
+    @player_board   = grid_coordinates
+    @computer_board = {}
+  end
+
   def grid_coordinates
     { "A1" => "", "A2" => "", "A3" => "", "A4" => "",
       "B1" => "", "B2" => "", "B3" => "", "B4" => "",
@@ -37,10 +45,10 @@ class DataStructure
 
   def small_ship_input(input)
     placement = input.split(" ")
-    return small_ship_placement[placement]
+    placement.each do |key|
+      @player_board = @player_board.update({key => "S"})
+    end
   end
-
-
 
 
   def hit(spot)
