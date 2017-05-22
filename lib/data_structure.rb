@@ -2,11 +2,17 @@
 class DataStructure
 
   attr_reader :player_board,
-              :computer_board
+              :computer_board,
+              :small_ship,
+              :large_ship,
+              :overlap
 
   def initialize
     @player_board   = grid_coordinates
     @computer_board = {}
+    @small_ship     = []
+    @large_ship     = []
+    @overlap        = false
   end
 
   def grid_coordinates
@@ -64,6 +70,7 @@ class DataStructure
 
   def small_ship_input(input)
     placement = input.split(" ")
+    @small_ship = placement
     placement.each do |key|
       @player_board = @player_board.update({key => "S"})
     end
@@ -76,6 +83,7 @@ class DataStructure
 
   def large_ship_input(input)
     placement = input.split(" ")
+    @large_ship = placement
     placement.each do |key|
       @player_board = @player_board.update({key => "S"})
     end
@@ -85,6 +93,20 @@ class DataStructure
     spot = large_ship_placement.keys.sample.join(" ")
     large_ship_input(spot)
   end
+
+  def ship_overlap?
+    @large_ship.each do |coordinate|
+      index = 0
+        if coordinate == @small_ship[0]
+          @overlap = true
+        else
+          @overlap = false
+        end
+        index += 1
+    end
+    @overlap
+  end
+
 
   def hit(spot)
     grid_coordinates[spot] = "H"
