@@ -66,18 +66,16 @@ class DataStructureTest < Minitest::Test
     coordinates = data.small_ship_input(input)
     expected = ["S", "S"]
     actual = data.player_board.values_at("A2", "A1")
-# binding.pry
+
     assert_equal expected, actual
   end
 
-
-
-
-  def test_random_ship_placement
-    skip
+  def test_small_ship_random_placement
     data = DataStructure.new
+    verify = data.small_ship_random_placement
 
-    assert_equal expected, actual
+    assert_equal ["S","S"], data.player_board.values_at(verify[0], verify[1])
   end
+
 
 end

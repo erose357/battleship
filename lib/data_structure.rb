@@ -50,6 +50,10 @@ class DataStructure
     end
   end
 
+  def small_ship_random_placement
+    spot = small_ship_placement.keys.sample.join(" ")
+    small_ship_input(spot)
+  end
 
   def hit(spot)
     grid_coordinates[spot] = "H"
