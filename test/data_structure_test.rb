@@ -77,5 +77,13 @@ class DataStructureTest < Minitest::Test
     assert_equal ["S","S"], data.player_board.values_at(verify[0], verify[1])
   end
 
+  def test_large_ship_placement_hash
+    data = DataStructure.new
+    input = "B2 B3 B4"
+    input = input.split
+binding.pry
+    assert_equal ["B2", "B3", "B4"], data.large_ship_placement[input]
+  end
+
 
 end
