@@ -92,11 +92,19 @@ class DataStructureTest < Minitest::Test
     assert_equal ["S", "S", "S"], data.player_board.values_at(verify[0], verify[1], verify[2])
   end
 
-  def test_random_ships_dont_overlap
+  def test_recognize_ship_overlap
     data = DataStructure.new
-    small_ship = data.small_ship_random_placement
-    large_ship = data.large_ship_random_placement
+    data.small_ship_input("B1 A1")
+    data.large_ship_input("B1 C1 D1")
 # binding.pry
+    assert data.ship_overlap?
+  end
+
+  def test_recognize_no_overlap
+    data = DataStructure.new
+    data.small_ship_input("A1 A2")
+    data.large_ship_input("B1 C1 D1")
+
     refute data.ship_overlap?
   end
 

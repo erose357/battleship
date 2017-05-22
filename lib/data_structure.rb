@@ -1,18 +1,16 @@
-
+require 'pry'
 class DataStructure
 
   attr_reader :player_board,
               :computer_board,
               :small_ship,
-              :large_ship,
-              :overlap
+              :large_ship
 
   def initialize
     @player_board   = grid_coordinates
     @computer_board = {}
     @small_ship     = []
     @large_ship     = []
-    @overlap        = false
   end
 
   def grid_coordinates
@@ -95,16 +93,18 @@ class DataStructure
   end
 
   def ship_overlap?
-    @large_ship.each do |coordinate|
-      index = 0
-        if coordinate == @small_ship[0]
-          @overlap = true
+    index = 0
+    overlap = false
+    until overlap == true || index > 2
+      @large_ship.each do |coordinate|
+        if coordinate == small_ship[index]
+          overlap = true
         else
-          @overlap = false
         end
-        index += 1
+      end
+      index +=1
     end
-    @overlap
+    overlap
   end
 
 
