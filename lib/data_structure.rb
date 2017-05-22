@@ -74,6 +74,18 @@ class DataStructure
     small_ship_input(spot)
   end
 
+  def large_ship_input(input)
+    placement = input.split(" ")
+    placement.each do |key|
+      @player_board = @player_board.update({key => "S"})
+    end
+  end
+
+  def large_ship_random_placement
+    spot = large_ship_placement.keys.sample.join(" ")
+    large_ship_input(spot)
+  end
+
   def hit(spot)
     grid_coordinates[spot] = "H"
   end

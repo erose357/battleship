@@ -81,8 +81,15 @@ class DataStructureTest < Minitest::Test
     data = DataStructure.new
     input = "B2 B3 B4"
     input = input.split
-binding.pry
+
     assert_equal ["B2", "B3", "B4"], data.large_ship_placement[input]
+  end
+
+  def test_large_ship_random_placement
+    data = DataStructure.new
+    verify = data.large_ship_random_placement
+
+    assert_equal ["S", "S", "S"], data.player_board.values_at(verify[0], verify[1], verify[2])
   end
 
 
