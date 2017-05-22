@@ -2,7 +2,7 @@ require 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/data_structure'
-
+require 'pry'
 class DataStructureTest < Minitest::Test
 
   def test_keys_in_coordinates
@@ -34,7 +34,31 @@ class DataStructureTest < Minitest::Test
     assert_equal "M", data.miss("D4")
   end
 
+  def test_small_ship_input_equals_output
+    data = DataStructure.new
+
+    assert_equal ["D4", "D3"], data.small_ship_placement[["D4", "D3"]]
+  end
+
+  def test_user_input_to_get_small_ship_placement
+    data = DataStructure.new
+    input = "D2 D1"
+
+    assert_equal ["D2", "D1"], data.small_ship_input(input)
+  end
+
+  def test_another_input_to_get_small_ship_placement
+    data = DataStructure.new
+    input = "A2 B2"
+
+    assert_equal ["A2", "B2"], data.small_ship_input(input)
+  end
+
+  
+
+
   def test_random_ship_placement
+    skip
     data = DataStructure.new
 
     assert_equal expected, actual
