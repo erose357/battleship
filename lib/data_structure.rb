@@ -128,27 +128,41 @@ class DataStructure
   end
 
   def computer_shot
-    @player_board.keys.sample
+    shot = @player_board.keys.sample
   end
 
   def computer_shot_taken?(shot)
     shot = @player_board[shot]
-      if shot == ""
+      if shot == "" || shot == "S"
         false
-      elsif shot == "S" || shot == "H" || shot == "M"
+      elsif shot == "H" || shot == "M"
         true
       end
   end
 
-#save this for assignment step
-  #   if spot == ""
-  #     @player_board.update({shot => "M"})
-  #   elsif spot == "S"
-  #     @player_board.update({shot => "H"})
-  #   else
-  #     puts "error"
-  #   end
-  # end
+  def computer_shot_hit?(shot)
+    shot = @player_board[shot]
+    if shot == "S"
+      true
+    else
+      false
+    end
+  end
+
+  def computer_shot_cycle
+    shot = computer_shot
+    if computer_shot_taken?(shot) == false
+      if computer_shot_hit?(shot) == true
+        @player_board.update({shot => "H"})
+        #need to create an update for visual board too
+      else
+        @player_board.update({shot => "M"})
+      end
+    elsif computer_shot_taken?(shot) == true
+      computer_shot_cycle
+    end
+  end
+
 
 
 

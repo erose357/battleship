@@ -130,12 +130,26 @@ class DataStructureTest < Minitest::Test
     assert data.player_board.include?(shot)
   end
 
-  def test_computer_shot_taken
+  def test_computer_shot_taken_M
     data = DataStructure.new
     data.player_board.update({"A3" => "M"})
 
 
     assert data.computer_shot_taken?("A3")
+  end
+
+  def test_computer_shot_taken_H
+    data = DataStructure.new
+    data.player_board.update({"D1" => "H"})
+
+    assert data.computer_shot_taken?("D1")
+  end
+
+  def test_computer_shot_taken_S
+    data = DataStructure.new
+    data.player_board.update({"C3" => "S"})
+
+    refute data.computer_shot_taken?("C3")
   end
 
   def test_computer_shot_not_taken
@@ -144,8 +158,27 @@ class DataStructureTest < Minitest::Test
     refute data.computer_shot_taken?("C3")
   end
 
+  def test_if_computer_shot_is_a_hit
+    data = DataStructure.new
+    data.player_board.update({"D2" => "S"})
 
+    assert data.computer_shot_hit?("D2")
+  end
 
+  def test_if_computer_shot_is_not_a_hit
+    data = DataStructure.new
 
+    refute data.computer_shot_hit?("C1")
+  end
 
+  def test_new_computer_shot_if_shot_already_taken_M
+    data = DataStructure.new
+    data.player_board.update({"A4" => "M"})
+    shot_one = data.computer_shot_cycle
+    expected = data.player_board.values
+    shot_two = data.computer_shot_cycle
+    actual = data.player_board.values
+
+    refute_equal expected, actual
+  end
 end
