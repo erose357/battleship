@@ -88,7 +88,11 @@ class DataStructure
   end
 
   def large_ship_random_placement
-    spot = large_ship_placement.keys.sample.join(" ")
+    @large_ship = large_ship_placement.keys.sample
+    until ship_overlap? == false
+      @large_ship = large_ship_placement.keys.sample
+    end
+    spot = @large_ship.join(" ")
     large_ship_input(spot)
   end
 

@@ -96,7 +96,7 @@ class DataStructureTest < Minitest::Test
     data = DataStructure.new
     data.small_ship_input("B1 A1")
     data.large_ship_input("B1 C1 D1")
-# binding.pry
+
     assert data.ship_overlap?
   end
 
@@ -108,5 +108,12 @@ class DataStructureTest < Minitest::Test
     refute data.ship_overlap?
   end
 
+  def test_rerun_random_placement_if_overlap
+    data = DataStructure.new
+    data.small_ship_input("B1 A1")
+    data.large_ship_random_placement
+binding.pry
+    refute data.ship_overlap?
+  end
 
 end
