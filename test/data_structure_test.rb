@@ -74,7 +74,7 @@ class DataStructureTest < Minitest::Test
     data = DataStructure.new
     verify = data.small_ship_random_placement
 
-    assert_equal ["S","S"], data.player_board.values_at(verify[0], verify[1])
+    assert_equal ["S","S"], data.computer_board.values_at(verify[0], verify[1])
   end
 
   def test_large_ship_placement_hash
@@ -89,7 +89,7 @@ class DataStructureTest < Minitest::Test
     data = DataStructure.new
     verify = data.large_ship_random_placement
 
-    assert_equal ["S", "S", "S"], data.player_board.values_at(verify[0], verify[1], verify[2])
+    assert_equal ["S", "S", "S"], data.computer_board.values_at(verify[0], verify[1], verify[2])
   end
 
   def test_recognize_ship_overlap
@@ -112,7 +112,7 @@ class DataStructureTest < Minitest::Test
     data = DataStructure.new
     data.small_ship_input("B1 A1")
     data.large_ship_random_placement
-binding.pry
+
     refute data.ship_overlap?
   end
 

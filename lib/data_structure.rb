@@ -76,7 +76,15 @@ class DataStructure
 
   def small_ship_random_placement
     spot = small_ship_placement.keys.sample.join(" ")
-    small_ship_input(spot)
+    small_ship_input_computer(spot)
+  end
+
+  def small_ship_input_computer(input)
+    placement = input.split(" ")
+    @small_ship = placement
+    placement.each do |key|
+      @computer_board = @computer_board.update({key => "S"})
+    end
   end
 
   def large_ship_input(input)
@@ -93,7 +101,15 @@ class DataStructure
       @large_ship = large_ship_placement.keys.sample
     end
     spot = @large_ship.join(" ")
-    large_ship_input(spot)
+    large_ship_input_computer(spot)
+  end
+
+  def large_ship_input_computer(input)
+    placement = input.split(" ")
+    @large_ship = placement
+    placement.each do |key|
+      @computer_board = @computer_board.update({key => "S"})
+    end
   end
 
   def ship_overlap?
