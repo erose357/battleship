@@ -116,4 +116,36 @@ class DataStructureTest < Minitest::Test
     refute data.ship_overlap?
   end
 
+  def test_random_computer_shot_selection
+    data = DataStructure.new
+    shot = data.computer_shot
+
+    assert data.player_board.include?(shot)
+  end
+
+  def test_different_random_computer_shot
+    data = DataStructure.new
+    shot = data.computer_shot
+
+    assert data.player_board.include?(shot)
+  end
+
+  def test_computer_shot_taken
+    data = DataStructure.new
+    data.player_board.update({"A3" => "M"})
+
+
+    assert data.computer_shot_taken?("A3")
+  end
+
+  def test_computer_shot_not_taken
+    data = DataStructure.new
+
+    refute data.computer_shot_taken?("C3")
+  end
+
+
+
+
+
 end

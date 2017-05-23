@@ -8,7 +8,7 @@ class DataStructure
 
   def initialize
     @player_board   = grid_coordinates
-    @computer_board = {}
+    @computer_board = grid_coordinates
     @small_ship     = []
     @large_ship     = []
   end
@@ -126,6 +126,31 @@ class DataStructure
     end
     overlap
   end
+
+  def computer_shot
+    @player_board.keys.sample
+  end
+
+  def computer_shot_taken?(shot)
+    shot = @player_board[shot]
+      if shot == ""
+        false
+      elsif shot == "S" || shot == "H" || shot == "M"
+        true
+      end
+  end
+
+#save this for assignment step
+  #   if spot == ""
+  #     @player_board.update({shot => "M"})
+  #   elsif spot == "S"
+  #     @player_board.update({shot => "H"})
+  #   else
+  #     puts "error"
+  #   end
+  # end
+
+
 
 
   def hit(spot)
