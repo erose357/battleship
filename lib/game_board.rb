@@ -11,7 +11,7 @@ class GameBoard
   end
 
   def top_border
-    "==========="
+    "=========="
   end
 
   def line_one
@@ -35,7 +35,7 @@ class GameBoard
   end
 
   def bottom_border
-    "==========="
+    "=========="
   end
 
 end

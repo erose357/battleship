@@ -1,3 +1,4 @@
+require './lib/game_board'
 
 class DataStructure
 
