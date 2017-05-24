@@ -22,18 +22,6 @@ class DataStructureTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_value_change_by_method
-    data = DataStructure.new
-
-    assert_equal "H", data.hit("C3")
-  end
-
-  def test_value_change_for_miss
-    data = DataStructure.new
-
-    assert_equal "M", data.miss("D4")
-  end
-
   def test_small_ship_input_equals_output
     data = DataStructure.new
 
@@ -74,7 +62,7 @@ class DataStructureTest < Minitest::Test
     data = DataStructure.new
     verify = data.small_ship_random_placement
 
-    assert_equal ["S","S"], data.player_board.values_at(verify[0], verify[1])
+    assert_equal ["S","S"], data.computer_board.values_at(verify[0], verify[1])
   end
 
   def test_large_ship_placement_hash
@@ -89,16 +77,132 @@ class DataStructureTest < Minitest::Test
     data = DataStructure.new
     verify = data.large_ship_random_placement
 
-    assert_equal ["S", "S", "S"], data.player_board.values_at(verify[0], verify[1], verify[2])
+    assert_equal ["S", "S", "S"], data.computer_board.values_at(verify[0], verify[1], verify[2])
   end
 
-  def test_random_ships_dont_overlap
+  def test_recognize_ship_overlap
     data = DataStructure.new
-    small_ship = data.small_ship_random_placement
-    large_ship = data.large_ship_random_placement
-# binding.pry
+    data.small_ship_input("B1 A1")
+    data.large_ship_input("B1 C1 D1")
+
+    assert data.ship_overlap?
+  end
+
+  def test_recognize_no_overlap
+    data = DataStructure.new
+    data.small_ship_input("A1 A2")
+    data.large_ship_input("B1 C1 D1")
+
     refute data.ship_overlap?
   end
 
+  def test_rerun_random_placement_if_overlap
+    data = DataStructure.new
+    data.small_ship_input("B1 A1")
+    data.large_ship_random_placement
+
+    refute data.ship_overlap?
+  end
+
+  def test_random_computer_shot_selection
+    data = DataStructure.new
+    shot = data.computer_shot
+
+    assert data.player_board.include?(shot)
+  end
+
+  def test_different_random_computer_shot
+    data = DataStructure.new
+    shot = data.computer_shot
+
+    assert data.player_board.include?(shot)
+  end
+
+  def test_computer_shot_taken_M
+    data = DataStructure.new
+    data.player_board.update({"A3" => "M"})
+
+
+    assert data.computer_shot_taken?("A3")
+  end
+
+  def test_computer_shot_taken_H
+    data = DataStructure.new
+    data.player_board.update({"D1" => "H"})
+
+    assert data.computer_shot_taken?("D1")
+  end
+
+  def test_computer_shot_taken_S
+    data = DataStructure.new
+    data.player_board.update({"C3" => "S"})
+
+    refute data.computer_shot_taken?("C3")
+  end
+
+  def test_computer_shot_not_taken
+    data = DataStructure.new
+
+    refute data.computer_shot_taken?("C3")
+  end
+
+  def test_if_computer_shot_is_a_hit
+    data = DataStructure.new
+    data.player_board.update({"D2" => "S"})
+
+    assert data.computer_shot_hit?("D2")
+  end
+
+  def test_if_computer_shot_is_not_a_hit
+    data = DataStructure.new
+
+    refute data.computer_shot_hit?("C1")
+  end
+
+  def test_new_computer_shot_if_shot_already_taken_M
+    data = DataStructure.new
+    data.player_board.update({"A4" => "M"})
+    shot_one = data.computer_shot_cycle
+    expected = data.player_board.values
+    shot_two = data.computer_shot_cycle
+    actual = data.player_board.values
+
+    refute_equal expected, actual
+  end
+
+  def test_player_shot_to_board
+    data = DataStructure.new
+
+    assert_equal "D4", data.player_shot("D4")
+  end
+
+  def test_player_shot_has_already_been_taken
+    data = DataStructure.new
+    data.computer_board.update({"C3" => "M"})
+    data.player_shot("C3")
+
+    assert data.player_shot_taken?("C3")
+  end
+
+  def test_player_shot_has_not_already_been_taken
+    data = DataStructure.new
+    data.player_shot("D1")
+
+    refute data.player_shot_taken?("D1")
+  end
+
+  def test_player_shot_shows_true_for_H
+    data = DataStructure.new
+    data.computer_board.update({"A3" => "H"})
+
+    assert data.player_shot_taken?("A3")
+  end
+
+  def test_player_shot_shows_false_for_S
+    data = DataStructure.new
+    data.computer_board.update({"B2" => "S"})
+
+    refute data.player_shot_taken?("B2")
+  end
 
 end

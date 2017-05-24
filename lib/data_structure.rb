@@ -1,19 +1,19 @@
+
 require './lib/game_board'
+
 
 class DataStructure
 
   attr_reader :player_board,
               :computer_board,
               :small_ship,
-              :large_ship,
-              :overlap
+              :large_ship
 
   def initialize
     @player_board   = grid_coordinates
-    @computer_board = {}
+    @computer_board = grid_coordinates
     @small_ship     = []
     @large_ship     = []
-    @overlap        = false
   end
 
   def grid_coordinates
@@ -79,7 +79,15 @@ class DataStructure
 
   def small_ship_random_placement
     spot = small_ship_placement.keys.sample.join(" ")
-    small_ship_input(spot)
+    small_ship_input_computer(spot)
+  end
+
+  def small_ship_input_computer(input)
+    placement = input.split(" ")
+    @small_ship = placement
+    placement.each do |key|
+      @computer_board = @computer_board.update({key => "S"})
+    end
   end
 
   def large_ship_input(input)
@@ -91,30 +99,95 @@ class DataStructure
   end
 
   def large_ship_random_placement
-    spot = large_ship_placement.keys.sample.join(" ")
-    large_ship_input(spot)
+    @large_ship = large_ship_placement.keys.sample
+    until ship_overlap? == false
+      @large_ship = large_ship_placement.keys.sample
+    end
+    spot = @large_ship.join(" ")
+    large_ship_input_computer(spot)
+  end
+
+  def large_ship_input_computer(input)
+    placement = input.split(" ")
+    @large_ship = placement
+    placement.each do |key|
+      @computer_board = @computer_board.update({key => "S"})
+    end
   end
 
   def ship_overlap?
-    @large_ship.each do |coordinate|
-      index = 0
-        if coordinate == @small_ship[0]
-          @overlap = true
+    index = 0
+    overlap = false
+    until overlap == true || index > 2
+      @large_ship.each do |coordinate|
+        if coordinate == small_ship[index]
+          overlap = true
         else
-          @overlap = false
         end
-        index += 1
+      end
+      index +=1
     end
-    @overlap
+    overlap
+  end
+
+  def computer_shot
+    shot = @player_board.keys.sample
+  end
+
+  def computer_shot_taken?(shot)
+    shot = @player_board[shot]
+      if shot == "" || shot == "S"
+        false
+      elsif shot == "H" || shot == "M"
+        true
+      end
+  end
+
+  def computer_shot_hit?(shot)
+    shot = @player_board[shot]
+    if shot == "S"
+      true
+    else
+      false
+    end
+  end
+
+  def computer_shot_cycle
+    shot = computer_shot
+    if computer_shot_taken?(shot) == false
+      if computer_shot_hit?(shot) == true
+        @player_board.update({shot => "H"})
+        #need to create an update for visual board too
+      else
+        @player_board.update({shot => "M"})
+        #need to create an update for visual board too
+      end
+    elsif computer_shot_taken?(shot) == true
+      computer_shot_cycle
+    end
+  end
+
+  def player_shot(input)
+    input
+  end
+
+  def player_shot_taken?(shot)
+    shot = @computer_board[shot]
+      if shot == "" || shot == "S"
+        false
+      elsif shot == "H" || shot == "M"
+        true
+      end
+  end
+
+  def prompt_for_new_shot
+    if player_shot_taken? == true
+      #prompt for new shot
+    end
   end
 
 
-  def hit(spot)
-    grid_coordinates[spot] = "H"
-  end
 
-  def miss(spot)
-    grid_coordinates[spot] = "M"
-  end
+
 
 end
