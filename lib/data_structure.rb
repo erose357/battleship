@@ -1,4 +1,7 @@
-require 'pry'
+
+require './lib/game_board'
+
+
 class DataStructure
 
   attr_reader :player_board,
