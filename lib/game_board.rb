@@ -40,5 +40,5 @@ class GameBoard
 
 end
 
-board = GameBoard.new
-board.print_board
+# board = GameBoard.new
+# board.print_board
