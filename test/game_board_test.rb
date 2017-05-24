@@ -68,7 +68,4 @@ class GameBoardTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  # def test_update_game_board_with_shot
-  #   player = GameBoard.new
-
 end
