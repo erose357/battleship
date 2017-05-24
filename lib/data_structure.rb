@@ -157,22 +157,34 @@ class DataStructure
         #need to create an update for visual board too
       else
         @player_board.update({shot => "M"})
+        #need to create an update for visual board too
       end
     elsif computer_shot_taken?(shot) == true
       computer_shot_cycle
     end
   end
 
-
-
-
-
-  def hit(spot)
-    grid_coordinates[spot] = "H"
+  def player_shot(input)
+    input
   end
 
-  def miss(spot)
-    grid_coordinates[spot] = "M"
+  def player_shot_taken?(shot)
+    shot = @computer_board[shot]
+      if shot == "" || shot == "S"
+        false
+      elsif shot == "H" || shot == "M"
+        true
+      end
   end
+
+  def prompt_for_new_shot
+    if player_shot_taken? == true
+      #prompt for new shot
+    end
+  end
+
+
+
+
 
 end

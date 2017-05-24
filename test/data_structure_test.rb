@@ -22,18 +22,6 @@ class DataStructureTest < Minitest::Test
     assert_equal expected, actual
   end
 
-  def test_value_change_by_method
-    data = DataStructure.new
-
-    assert_equal "H", data.hit("C3")
-  end
-
-  def test_value_change_for_miss
-    data = DataStructure.new
-
-    assert_equal "M", data.miss("D4")
-  end
-
   def test_small_ship_input_equals_output
     data = DataStructure.new
 
@@ -181,4 +169,40 @@ class DataStructureTest < Minitest::Test
 
     refute_equal expected, actual
   end
+
+  def test_player_shot_to_board
+    data = DataStructure.new
+
+    assert_equal "D4", data.player_shot("D4")
+  end
+
+  def test_player_shot_has_already_been_taken
+    data = DataStructure.new
+    data.computer_board.update({"C3" => "M"})
+    data.player_shot("C3")
+
+    assert data.player_shot_taken?("C3")
+  end
+
+  def test_player_shot_has_not_already_been_taken
+    data = DataStructure.new
+    data.player_shot("D1")
+
+    refute data.player_shot_taken?("D1")
+  end
+
+  def test_player_shot_shows_true_for_H
+    data = DataStructure.new
+    data.computer_board.update({"A3" => "H"})
+
+    assert data.player_shot_taken?("A3")
+  end
+
+  def test_player_shot_shows_false_for_S
+    data = DataStructure.new
+    data.computer_board.update({"B2" => "S"})
+
+    refute data.player_shot_taken?("B2")
+  end
+
 end
