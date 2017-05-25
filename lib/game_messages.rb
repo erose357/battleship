@@ -16,6 +16,16 @@ module GameMessages
     puts "Exiting game"
   end
 
+  def large_ship_prompt
+    puts "Enter position for Large Ship"
+    print ">"
+  end
+
+  def invalid_ship_coordinate
+    puts "Invalid ship position, re-enter"
+    print ">"
+  end
+
   def invalid_shot
     puts "Invalid shot, enter new coordinate"
     print ">"

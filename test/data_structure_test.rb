@@ -205,30 +205,28 @@ require 'pry'
     refute data.player_shot_taken?("B2")
   end
 
-  # def test_player_shot_shows_on_game_board
-  #   data = DataStructure.new
-  #   board = GameBoard.new
-  #   data.player_shot("A1")
-  #   actual = board.line_two[1]
-  #
-  #
-  #   assert_equal "M", actual
-  # end
-
-  def test_player_shot_cycle
-    skip
+  def test_player_ship_coordinate_is_valid
     data = DataStructure.new
 
-    assert data.computer_board.include?("M")
+    assert data.small_ship_valid?(["B1", "B2"])
   end
 
-  def test_update_computer_board
-    skip
+  def test_player_ship_coordinate_is_invalid
     data = DataStructure.new
-    data.player_shot("A1")
 
-    actual = data.computer_game_board.line_two[1]
-
-    assert_equal "M", actual
+    refute data.small_ship_valid?(["B1","B4"])
   end
+
+  def test_player_small_ship_placement
+    skip #may do this through the loop
+    data = DataStructure.new
+    ship = data.small_ship_position("C3 C4")
+
+
+    assert_equal 2, data.player_board.values.uniq.count
+  end
+
+
+
+
 end

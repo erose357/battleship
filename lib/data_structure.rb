@@ -83,6 +83,21 @@ class DataStructure
     end
   end
 
+  def small_ship_valid?(input)
+   small_ship_placement.include?(input)
+ end
+
+ # def small_ship_position(input)
+ #   convert = input.split(" ")
+ #   verify = small_ship_valid?(convert)
+ #   if verify == true
+ #     small_ship_input(convert)
+ #   else
+ #
+ #
+ # end
+
+
   def large_ship_input(input)
     placement = input.split(" ")
     @large_ship = placement

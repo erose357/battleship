@@ -20,6 +20,19 @@ class GameStart
       game = DataStructure.new
       game.small_ship_random_placement
       game.large_ship_random_placement
+      player_ship_placement = false
+    #need to break into a separate method  
+      # until player_ship_placement == true
+      #   if game.small_ship_valid?(user_input) == true
+      #     game.small_ship_input(user_input)
+      #     GameMessages.large_ship_prompt
+      #     player_ship_placement = true
+        # elsif game.small_ship_valid?(user_input) == false
+        #   GameMessages.invalid_ship_coordinate
+        #   game.small_ship_valid?(user_input)
+      #   end
+      # end
+
       if user_input == "q" || user_input == "quit"
         GameMessages.quit_message
         break
