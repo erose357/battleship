@@ -16,4 +16,27 @@ module GameMessages
     puts "Exiting game"
   end
 
+  def invalid_shot
+    puts "Invalid shot, enter new coordinate"
+    print ">"
+  end
+
+  def start_game
+    puts "I have laid out my ships on the grid."
+    puts "You now need to layout your two ships."
+    puts "The first is two units long and the"
+    puts "second is three units long."
+    puts "The grid has A1 at the top left and D4 at the bottom right."
+    puts " "
+    puts "Enter the squares for the two-unit ship:"
+    print ">"
+  end
 end
+
+# I have laid out my ships on the grid.
+# You now need to layout your two ships.
+# The first is two units long and the
+# second is three units long.
+# The grid has A1 at the top left and D4 at the bottom right.
+#
+# Enter the squares for the two-unit ship:

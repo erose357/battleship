@@ -83,6 +83,14 @@ class DataStructure
     end
   end
 
+  def large_ship_input(input)
+    placement = input.split(" ")
+    @large_ship = placement
+    placement.each do |key|
+      @player_board = @player_board.update({key => "S"})
+    end
+  end
+
   def small_ship_random_placement
     spot = small_ship_placement.keys.sample.join(" ")
     small_ship_input_computer(spot)
@@ -96,13 +104,7 @@ class DataStructure
     end
   end
 
-  def large_ship_input(input)
-    placement = input.split(" ")
-    @large_ship = placement
-    placement.each do |key|
-      @player_board = @player_board.update({key => "S"})
-    end
-  end
+
 
   def large_ship_random_placement
     @large_ship = large_ship_placement.keys.sample

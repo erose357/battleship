@@ -15,7 +15,8 @@ until end_loop == true
   elsif user_input == "i" || user_input == "instructions"
     GameMessages.instructions
   elsif user_input == "p" || user_input == "play"
-    # need to figure this out
-    # end_loop = true
+    game_start = GameStart.new
+    game_start.ship_placement
+    end_loop = true
   end
 end
