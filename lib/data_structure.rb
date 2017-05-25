@@ -4,14 +4,20 @@ require './lib/game_board'
 
 class DataStructure
 
+  attr_accessor :computer_game_board,
+                :player_game_board
+
   attr_reader :player_board,
               :computer_board,
               :small_ship,
               :large_ship
 
+
   def initialize
     @player_board   = grid_coordinates
     @computer_board = grid_coordinates
+    @computer_game_board = GameBoard.new
+    @player_game_board = GameBoard.new
     @small_ship     = []
     @large_ship     = []
   end
@@ -181,13 +187,33 @@ class DataStructure
   end
 
   def prompt_for_new_shot
-    if player_shot_taken? == true
+    # if player_shot_taken? == true
       #prompt for new shot
+      # GameMessage.new_shot_prompt
+  end
+
+  def player_shot_cycle(input)
+    player_shot(input)
+    if player_shot_taken?(input) == true
+      prompt_for_new_shot
+    elsif player_shot_take?(input) == false
+      #need a way to deal with hits
+      update_computer_board(input)
     end
   end
 
-
-
-
+  # def update_computer_board(input)
+  #   shot = input.chars
+  #   case
+  #   when shot[0] == "A"
+  #     @computer_game_board.line_two[shot[1]] = "M"
+  #   when shot[0] == "B"
+  #     @computer_game_board.line_three[shot[1]] = "M"
+  #   when shot[0] == "C"
+  #     @computer_game_board.line_four[shot[1]] = "M"
+  #   when shot[0] == "D"
+  #     @computer_game_board.line_five[shot[1]] = "M"
+  #   end
+  # end
 
 end

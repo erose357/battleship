@@ -4,7 +4,7 @@ require 'minitest/pride'
 require './lib/data_structure'
 require 'pry'
 class DataStructureTest < Minitest::Test
-
+require 'pry'
   def test_keys_in_coordinates
     data = DataStructure.new
     expected = [ "A1", "A2", "A3", "A4", "B1", "B2", "B3",
@@ -205,4 +205,30 @@ class DataStructureTest < Minitest::Test
     refute data.player_shot_taken?("B2")
   end
 
+  # def test_player_shot_shows_on_game_board
+  #   data = DataStructure.new
+  #   board = GameBoard.new
+  #   data.player_shot("A1")
+  #   actual = board.line_two[1]
+  #
+  #
+  #   assert_equal "M", actual
+  # end
+
+  def test_player_shot_cycle
+    skip
+    data = DataStructure.new
+
+    assert data.computer_board.include?("M")
+  end
+
+  def test_update_computer_board
+    skip
+    data = DataStructure.new
+    data.player_shot("A1")
+
+    actual = data.computer_game_board.line_two[1]
+
+    assert_equal "M", actual
+  end
 end
